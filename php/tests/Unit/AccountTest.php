@@ -14,4 +14,22 @@ class AccountTest extends TestCase
         $account = new Account();
         $account->deposit(-1000);
     }
+
+    /** @test */
+    public function should_not_deposit_zero_money(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Amount can not be zero');
+        $account = new Account();
+        $account->deposit(0);
+    }
+
+    /** @test */
+    public function should_deposit_money(): void
+    {
+        $account = new Account();
+        $account->deposit(300);
+
+        $this->assertTrue($account->transactions[0] === 300);
+    }
 }
