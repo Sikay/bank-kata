@@ -11,18 +11,14 @@ class Account implements AccountService
 
     public function deposit(int $amount): void
     {
-        if ($amount <= 0) {
-            throw new \InvalidArgumentException('The amount can not be zero or negative');
-        }
+        $this->validAmount($amount);
 
         $this->transactions[] = $amount;
     }
 
     public function withdraw(int $amount): void
     {
-        if ($amount <= 0) {
-            throw new \InvalidArgumentException('The amount can not be zero');
-        }
+        $this->validAmount($amount);
 
         $this->transactions[] = - $amount;
     }
@@ -30,5 +26,12 @@ class Account implements AccountService
     public function printStatement(): void
     {
 
+    }
+
+    private function validAmount(int $amount): void
+    {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('The amount can not be zero or negative');
+        }
     }
 }
