@@ -20,7 +20,7 @@ class Account implements AccountService
 
     public function withdraw(int $amount): void
     {
-        if ($amount === 0) {
+        if ($amount <= 0) {
             throw new \InvalidArgumentException('The amount can not be zero');
         }
     }

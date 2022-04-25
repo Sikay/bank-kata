@@ -39,4 +39,12 @@ class AccountTest extends TestCase
         $account = new Account();
         $account->withdraw(0);
     }
+
+    /** @test */
+    public function should_not_withdraw_negative_money(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $account = new Account();
+        $account->withdraw(-1000);
+    }
 }
