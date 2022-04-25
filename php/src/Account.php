@@ -2,10 +2,21 @@
 
 namespace BankKata;
 
-class Account
+class Account implements AccountService
 {
-    public function changeMe(): bool
+
+    public function deposit(int $amount): void
     {
-        return true;
+
+    }
+
+    public function withdraw(int $amount): void
+    {
+
+    }
+
+    public function printStatement(): void
+    {
+
     }
 }
