@@ -31,4 +31,12 @@ class AccountTest extends TestCase
 
         $this->assertTrue($account->transactions[0] === 300);
     }
+
+    /** @test */
+    public function should_not_withdraw_zero_money(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $account = new Account();
+        $account->withdraw(0);
+    }
 }
