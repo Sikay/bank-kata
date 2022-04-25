@@ -19,7 +19,6 @@ class AccountTest extends TestCase
     public function should_not_deposit_zero_money(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Amount can not be zero');
         $account = new Account();
         $account->deposit(0);
     }

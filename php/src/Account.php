@@ -11,12 +11,8 @@ class Account implements AccountService
 
     public function deposit(int $amount): void
     {
-        if ($amount === 0) {
-            throw new \InvalidArgumentException('Amount can not be zero');
-        }
-
-        if ($amount < 0) {
-            throw new \InvalidArgumentException('The amount can not be negative');
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('The amount can not be zero or negative');
         }
 
         $this->transactions[] = $amount;
