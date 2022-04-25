@@ -47,4 +47,13 @@ class AccountTest extends TestCase
         $account = new Account();
         $account->withdraw(-1000);
     }
+
+    /** @test */
+    public function should_withdraw_money(): void
+    {
+        $account = new Account();
+        $account->withdraw(300);
+
+        $this->assertTrue($account->transactions[0] === -300);
+    }
 }

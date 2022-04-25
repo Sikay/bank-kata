@@ -23,6 +23,8 @@ class Account implements AccountService
         if ($amount <= 0) {
             throw new \InvalidArgumentException('The amount can not be zero');
         }
+
+        $this->transactions[] = - $amount;
     }
 
     public function printStatement(): void
