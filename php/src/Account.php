@@ -7,6 +7,7 @@ use function PHPUnit\Framework\throwException;
 
 class Account implements AccountService
 {
+    private const MIN_AMOUNT = 0;
     public $transactions;
 
     public function deposit(int $amount): void
@@ -30,7 +31,7 @@ class Account implements AccountService
 
     private function validAmount(int $amount): void
     {
-        if ($amount <= 0) {
+        if ($amount <= self::MIN_AMOUNT) {
             throw new \InvalidArgumentException('The amount can not be zero or negative');
         }
     }
