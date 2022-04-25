@@ -5,7 +5,7 @@ namespace BankKata\Test\Acceptance;
 use BankKata\Account;
 use PHPUnit\Framework\TestCase;
 
-class AccountTest extends TestCase
+class AccountServiceTest extends TestCase
 {
     /** @test */
     public function should_print_all_transactions()
