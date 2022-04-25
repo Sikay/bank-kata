@@ -3,7 +3,6 @@
 namespace BankKata;
 
 use http\Exception\InvalidArgumentException;
-use function PHPUnit\Framework\throwException;
 
 class Account implements AccountService
 {
