@@ -3,15 +3,18 @@
 namespace BankKata\Test\Unit;
 
 use BankKata\Account;
+use BankKata\Transactions;
 use PHPUnit\Framework\TestCase;
 
 class AccountTest extends TestCase
 {
     private $account;
+    private $transactions;
 
     public function setUp(): void
     {
-        $this->account = new Account();
+        $this->transactions = new Transactions();
+        $this->account = new Account($this->transactions);
     }
 
     /** @test */
@@ -31,8 +34,10 @@ class AccountTest extends TestCase
     /** @test */
     public function should_deposit_money(): void
     {
+        $deposit = new Transactions();
+        $deposit->add(300);
         $this->account->deposit(300);
-        $this->assertTrue($this->account->transactions[0] === 300);
+        $this->assertEquals($this->transactions->all(), $deposit->all(), '\$canonicalize = true', 0.0, 10, true);
     }
 
     /** @test */
@@ -52,7 +57,9 @@ class AccountTest extends TestCase
     /** @test */
     public function should_withdraw_money(): void
     {
+        $withdraw = new Transactions();
+        $withdraw->add(-300);
         $this->account->withdraw(300);
-        $this->assertTrue($this->account->transactions[0] === -300);
+        $this->assertEquals($this->transactions->all(), $withdraw->all(), '\$canonicalize = true', 0.0, 10, true);
     }
 }

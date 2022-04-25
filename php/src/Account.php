@@ -9,18 +9,23 @@ class Account implements AccountService
     private const MIN_AMOUNT = 0;
     public $transactions;
 
+    public function __construct(Transactions $transactions)
+    {
+        $this->transactions = $transactions;
+    }
+
     public function deposit(int $amount): void
     {
         $this->validAmount($amount);
 
-        $this->transactions[] = $amount;
+        $this->transactions->add($amount);
     }
 
     public function withdraw(int $amount): void
     {
         $this->validAmount($amount);
 
-        $this->transactions[] = - $amount;
+        $this->transactions->add(-$amount);
     }
 
     public function printStatement(): void
