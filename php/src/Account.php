@@ -1,8 +1,8 @@
 <?php
 
-namespace KataTemplate;
+namespace BankKata;
 
-class KataTemplate
+class Account
 {
     public function changeMe(): bool
     {

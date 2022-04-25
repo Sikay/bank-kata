@@ -12,6 +12,8 @@ coverage:
 	./vendor/bin/phpunit --coverage-html coverage
 mutants:
 	./vendor/bin/infection
+dump-autoload:
+	composer dump-autoload
 
 # Docker commands
 docker-build:
@@ -24,6 +26,8 @@ docker-coverage:
 	@docker run --rm -v $(shell pwd):/opt/project php-docker-bootstrap make coverage
 docker-mutants:
 	@docker run --rm -v $(shell pwd):/opt/project php-docker-bootstrap phpdbg -qrr ./vendor/bin/infection
+docker-dump-autoload:
+	@docker run --rm -v $(shell pwd):/opt/project php-docker-bootstrap make dump-autoload
 
 define HELP
 # Local commands

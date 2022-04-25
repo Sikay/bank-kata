@@ -1,16 +1,16 @@
 <?php
 
-namespace KataTemplate\Test;
+namespace BankKata\Test;
 
-use KataTemplate\KataTemplate;
+use BankKata\Account;
 use PHPUnit\Framework\TestCase;
 
-class KataTemplateTest extends TestCase
+class AccountTest extends TestCase
 {
     /** @test */
     public function change_me()
     {
-        $kataTemplate = new KataTemplate();
+        $kataTemplate = new Account();
         $this->assertTrue($kataTemplate->changeMe());
     }
 }

@@ -9,8 +9,8 @@
     },
     "autoload": {
         "psr-4": {
-            "KataTemplate\\": "src",
-            "KataTemplate\\Test\\": "tests"
+            "BankKata\\": "src",
+            "BankKata\\Test\\": "tests"
         }
     }
 }
