@@ -8,16 +8,18 @@ class Account implements AccountService
 {
     private const MIN_AMOUNT = 0;
     private $transactions;
+    private $date;
 
-    public function __construct(Transactions $transactions)
+    public function __construct(Transactions $transactions, Date $date)
     {
         $this->transactions = $transactions;
+        $this->date = $date;
     }
 
     public function deposit(int $amount): void
     {
         $this->validAmount($amount);
-        $deposit = new Transaction('', $amount);
+        $deposit = new Transaction($this->date->asString(), $amount);
         $this->transactions->add($deposit);
     }
 

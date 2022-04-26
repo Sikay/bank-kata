@@ -3,6 +3,7 @@
 namespace BankKata\Test\Unit;
 
 use BankKata\Account;
+use BankKata\Date;
 use BankKata\Transaction;
 use BankKata\Transactions;
 use PHPUnit\Framework\TestCase;
@@ -11,11 +12,13 @@ class AccountTest extends TestCase
 {
     private $account;
     private $transactions;
+    private $date;
 
     public function setUp(): void
     {
         $this->transactions = new Transactions();
-        $this->account = new Account($this->transactions);
+        $this->date = $this->createMock(Date::class);
+        $this->account = new Account($this->transactions, $this->date);
     }
 
     /** @test */
@@ -35,8 +38,9 @@ class AccountTest extends TestCase
     /** @test */
     public function should_deposit_money(): void
     {
+        $this->date->method('asString')->willReturn('14/02/2017');
         $deposit = new Transactions();
-        $deposit->add(new Transaction('',300));
+        $deposit->add(new Transaction('14/02/2017',300));
         $this->account->deposit(300);
         $this->assertEquals($this->transactions->all(), $deposit->all(), '\$canonicalize = true', 0.0, 10, true);
     }
