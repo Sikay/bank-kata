@@ -3,10 +3,19 @@
 namespace BankKata\Test\Acceptance;
 
 use BankKata\Account;
+use BankKata\Transactions;
 use PHPUnit\Framework\TestCase;
 
 class AccountServiceTest extends TestCase
 {
+    private $account;
+
+    public function setUp(): void
+    {
+        $transactions = new Transactions();
+        $this->account = new Account($transactions);
+    }
+
     /** @test */
     public function should_print_all_transactions()
     {
@@ -15,12 +24,11 @@ class AccountServiceTest extends TestCase
                         '13/01/2012 || 2000   || 3000\n' .
                         '10/01/2012 || 1000   || 1000';
 
-        $account = new Account();
-        $account->deposit(1000);
-        $account->deposit(2000);
-        $account->withdraw(500);
+        $this->account->deposit(1000);
+        $this->account->deposit(2000);
+        $this->account->withdraw(500);
 
-        $account->printStatement();
+        $this->account->printStatement();
 
         $this->expectOutputString($expectedOutput);
     }
