@@ -4,18 +4,21 @@ namespace BankKata\Test\Acceptance;
 
 use BankKata\Account;
 use BankKata\Date;
+use BankKata\StatementPrinter;
 use BankKata\Transactions;
 use PHPUnit\Framework\TestCase;
 
 class AccountServiceTest extends TestCase
 {
     private $account;
+    private $date;
 
     public function setUp(): void
     {
         $transactions = new Transactions();
         $this->date = $this->createMock(Date::class);
-        $this->account = new Account($transactions, $this->date);
+        $statementPrinter = new StatementPrinter();
+        $this->account = new Account($transactions, $this->date, $statementPrinter);
     }
 
     /** @test */

@@ -4,6 +4,7 @@ namespace BankKata\Test\Unit;
 
 use BankKata\Account;
 use BankKata\Date;
+use BankKata\StatementPrinter;
 use BankKata\Transaction;
 use BankKata\Transactions;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,8 @@ class AccountTest extends TestCase
     {
         $this->transactions = new Transactions();
         $this->date = $this->createMock(Date::class);
-        $this->account = new Account($this->transactions, $this->date);
+        $statementPrinter = $this->createMock(StatementPrinter::class);
+        $this->account = new Account($this->transactions, $this->date, $statementPrinter);
     }
 
     /** @test */

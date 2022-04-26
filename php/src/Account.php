@@ -7,13 +7,15 @@ use http\Exception\InvalidArgumentException;
 class Account implements AccountService
 {
     private const MIN_AMOUNT = 0;
-    private $transactions;
-    private $date;
+    private Transactions $transactions;
+    private Date $date;
+    private StatementPrinter $statementPrinter;
 
-    public function __construct(Transactions $transactions, Date $date)
+    public function __construct(Transactions $transactions, Date $date, StatementPrinter $statementPrinter)
     {
         $this->transactions = $transactions;
         $this->date = $date;
+        $this->statementPrinter = $statementPrinter;
     }
 
     public function deposit(int $amount): void
@@ -32,19 +34,7 @@ class Account implements AccountService
 
     public function printStatement(): void
     {
-        $header = 'Date       || Amount || Balance\n';
-        $body = '';
-        $totalAmount = 0;
-        foreach ($this->transactions->all() as $transaction) {
-            $totalAmount += $transaction->amount();
-        }
-        $transactionShort = array_reverse($this->transactions->all());
-        foreach ($transactionShort as $transaction) {
-            $body .= $transaction->date() . ' || ' . $transaction->amount() . '   || ' . $totalAmount . '\n';
-            $totalAmount -= $transaction->amount();
-        }
-        $statement = $header . $body;
-        print($statement);
+        $this->statementPrinter->print($this->transactions->all());
     }
 
     private function validAmount(int $amount): void
