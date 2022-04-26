@@ -6,9 +6,9 @@ class Transactions
 {
     private $transactions;
 
-    public function add(int $amount): void
+    public function add(Transaction $transaction): void
     {
-        $this->transactions[] = $amount;
+        $this->transactions[] = $transaction;
     }
 
     public function all(): array

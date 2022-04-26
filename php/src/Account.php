@@ -7,7 +7,7 @@ use http\Exception\InvalidArgumentException;
 class Account implements AccountService
 {
     private const MIN_AMOUNT = 0;
-    public $transactions;
+    private $transactions;
 
     public function __construct(Transactions $transactions)
     {
@@ -17,15 +17,15 @@ class Account implements AccountService
     public function deposit(int $amount): void
     {
         $this->validAmount($amount);
-
-        $this->transactions->add($amount);
+        $deposit = new Transaction('', $amount);
+        $this->transactions->add($deposit);
     }
 
     public function withdraw(int $amount): void
     {
         $this->validAmount($amount);
-
-        $this->transactions->add(-$amount);
+        $withdraw = new Transaction('', -$amount);
+        $this->transactions->add($withdraw);
     }
 
     public function printStatement(): void
