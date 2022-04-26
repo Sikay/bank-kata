@@ -26,7 +26,7 @@ class Account implements AccountService
     public function withdraw(int $amount): void
     {
         $this->validAmount($amount);
-        $withdraw = new Transaction('', -$amount);
+        $withdraw = new Transaction($this->date->asString(), -$amount);
         $this->transactions->add($withdraw);
     }
 

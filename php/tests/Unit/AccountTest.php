@@ -62,8 +62,9 @@ class AccountTest extends TestCase
     /** @test */
     public function should_withdraw_money(): void
     {
+        $this->date->method('asString')->willReturn('15/02/2017');
         $withdraw = new Transactions();
-        $withdraw->add(new Transaction('',-300));
+        $withdraw->add(new Transaction('15/02/2017',-300));
         $this->account->withdraw(300);
         $this->assertEquals($this->transactions->all(), $withdraw->all(), '\$canonicalize = true', 0.0, 10, true);
     }
