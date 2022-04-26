@@ -32,7 +32,19 @@ class Account implements AccountService
 
     public function printStatement(): void
     {
-
+        $header = 'Date       || Amount || Balance\n';
+        $body = '';
+        $totalAmount = 0;
+        foreach ($this->transactions->all() as $transaction) {
+            $totalAmount += $transaction->amount();
+        }
+        $transactionShort = array_reverse($this->transactions->all());
+        foreach ($transactionShort as $transaction) {
+            $body .= $transaction->date() . ' || ' . $transaction->amount() . '   || ' . $totalAmount . '\n';
+            $totalAmount -= $transaction->amount();
+        }
+        $statement = $header . $body;
+        print($statement);
     }
 
     private function validAmount(int $amount): void
