@@ -24,10 +24,10 @@ class AccountServiceTest extends TestCase
     /** @test */
     public function should_print_all_transactions()
     {
-        $expectedOutput = 'Date       || Amount || Balance\n' .
-                        '14/01/2012 || -500   || 2500\n' .
-                        '13/01/2012 || 2000   || 3000\n' .
-                        '10/01/2012 || 1000   || 1000\n';
+        $expectedOutput = 'Date       || Amount || Balance' . PHP_EOL .
+                        '14/01/2012 || -500   || 2500' . PHP_EOL .
+                        '13/01/2012 || 2000   || 3000' . PHP_EOL .
+                        '10/01/2012 || 1000   || 1000' . PHP_EOL;
 
         $this->date->method('asString')
                     ->willReturnOnConsecutiveCalls('10/01/2012', '13/01/2012', '14/01/2012');

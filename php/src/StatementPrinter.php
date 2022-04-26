@@ -6,7 +6,7 @@ class StatementPrinter
 {
     public function print(array $transactions): void
     {
-        $header = 'Date       || Amount || Balance\n';
+        $header = 'Date       || Amount || Balance' . PHP_EOL;
         $body = '';
         $totalAmount = 0;
         foreach ($transactions as $transaction) {
@@ -14,7 +14,7 @@ class StatementPrinter
         }
         $transactionShort = array_reverse($transactions);
         foreach ($transactionShort as $transaction) {
-            $body .= $transaction->date() . ' || ' . $transaction->amount() . '   || ' . $totalAmount . '\n';
+            $body .= $transaction->date() . ' || ' . $transaction->amount() . '   || ' . $totalAmount . PHP_EOL;
             $totalAmount -= $transaction->amount();
         }
         $statement = $header . $body;
