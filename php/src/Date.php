@@ -4,8 +4,15 @@ namespace BankKata;
 
 class Date
 {
+    private $date;
+
+    public function __construct(string $date)
+    {
+        $this->date = strtotime($date);
+    }
+
     public function asString(): string
     {
-        return '14/02/2017';
+        return date("d/m/Y", $this->date);
     }
 }
